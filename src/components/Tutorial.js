@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/TutorialServiceFirebase";
-import { useList } from "react-firebase-hooks/database";
+import TutorialDataService from "../services/TutorialDataService";
+import { Link } from "react-router-dom";
+
 
 const Tutorial = props => {
   const initialTutorialState = {
     key: null,
     title: "",
     description: "",
-    published: false,
+    published: "Unpublished",
   };
   const [message, setMessage] = useState("");
   
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
-  const [tutorials, loading, error] = useList(TutorialDataService.getById(props.match.params.id));
   const [key, setKey] = useState(props.match.params.id)
 
-  const setActiveTutorial = (val, chave) => {
-    setCurrentTutorial({... currentTutorial, [chave]: val});
-    console.log(currentTutorial)
-
-  };
-
-
   useEffect(()=>{
-    setCurrentTutorial({... currentTutorial, ["key"]: key});
+    const data = TutorialDataService.getById(key)
+    console.log(key)
+    setCurrentTutorial(data[0])     
   }, [])
-
-  useEffect(() => {
-      if (tutorials.length-1 >= 0){
-        setActiveTutorial(tutorials[tutorials.length-1].val(), tutorials[tutorials.length-1].key)
-      }
-  }, [tutorials]);
 
   const   handleInputChange = event => {
     const { name, value } = event.target;
@@ -38,47 +27,30 @@ const Tutorial = props => {
   };
 
   const updatePublished = status => {
-    var data = {
-      published: status
-    };
-    TutorialDataService.update(currentTutorial.key, data)
-      .then(response => {
-        setCurrentTutorial({ ...currentTutorial, published: status });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });  
-    };
-
-  const updateTutorial = () => {
     const data = {
       title: currentTutorial.title,
       description: currentTutorial.description,
+      published: status
     };
+    TutorialDataService.update(key, data);  
+    setCurrentTutorial(data)
+  };
 
-    TutorialDataService.update(currentTutorial.key, data)
-    .then(response => {
-      console.log(response.data)
-      setMessage("The tutorial was updated successfully!");
-    })
-    .catch(e=>{
-      console.log(e)
-    })
+  const updateTutorial = () => {
+    //console.log(currentTutorial)
+    const data = {
+      title: currentTutorial.title,
+      description: currentTutorial.description,
+      published: currentTutorial.published
+    };  
+    TutorialDataService.update(key, data);
+    setCurrentTutorial(data)
   };
 
   const deleteTutorial = () => {
     console.log(currentTutorial)
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(currentTutorial.key)
-      .then(response => {
-        console.log(response.data);
-        props.history.push("/tutorials");
-        //props.refreshList();
-      })
-      .catch(e => {
-        console.log(e);
-      });  
+      TutorialDataService.remove(currentTutorial.key);  
     }
   };
 
@@ -139,14 +111,16 @@ const Tutorial = props => {
           <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
             Delete
           </button>
-
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateTutorial}
-          >
-            Update
-          </button>
+          
+          <Link to="/">
+            <button
+              type="submit"
+              className="badge badge-success"
+              onClick={updateTutorial}
+            >
+              Update
+            </button>
+          </Link>
           <p>{message}</p>
         </div>
       ) : (
