@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TutorialDataService from "../services/TutorialDataService";
+import TutorialDataService from "../services/TutorialDataServiceRest";
 import { Link } from "react-router-dom";
 
 
@@ -15,42 +15,65 @@ const Tutorial = props => {
   const [currentTutorial, setCurrentTutorial] = useState(initialTutorialState);
   const [key, setKey] = useState(props.match.params.id)
 
-  useEffect(()=>{
-    const data = TutorialDataService.getById(key)
-    console.log(key)
-    setCurrentTutorial(data[0])     
-  }, [])
-
   const   handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentTutorial({ ...currentTutorial, [name]: value });
   };
 
+  const getTutorial = id => {
+    TutorialDataService.get(id)
+      .then(response => {
+        setCurrentTutorial(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getTutorial(props.match.params.id);
+  }, [props.match.params.id]);
+
   const updatePublished = status => {
-    const data = {
+    var data = {
+      id: currentTutorial.id,
       title: currentTutorial.title,
       description: currentTutorial.description,
       published: status
     };
-    TutorialDataService.update(key, data);  
-    setCurrentTutorial(data)
+
+    TutorialDataService.update(currentTutorial.id, data)
+      .then(response => {
+        setCurrentTutorial({ ...currentTutorial, published: status });
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const updateTutorial = () => {
-    //console.log(currentTutorial)
-    const data = {
-      title: currentTutorial.title,
-      description: currentTutorial.description,
-      published: currentTutorial.published
-    };  
-    TutorialDataService.update(key, data);
-    setCurrentTutorial(data)
+    TutorialDataService.update(currentTutorial.id, currentTutorial)
+      .then(response => {
+        console.log(response);
+        setMessage("The tutorial was updated successfully!");
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const deleteTutorial = () => {
-    console.log(currentTutorial)
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(currentTutorial.key);  
+    TutorialDataService.remove(currentTutorial.id)
+      .then(response => {
+        console.log(response.data);
+        props.history.push("/tutorials");
+      })
+      .catch(e => {
+        console.log(e);
+      });
     }
   };
 
@@ -112,7 +135,7 @@ const Tutorial = props => {
             Delete
           </button>
           
-          <Link to="/">
+          <Link to="/tutorials">
             <button
               type="submit"
               className="badge badge-success"

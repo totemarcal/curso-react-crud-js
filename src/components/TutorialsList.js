@@ -1,44 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import TutorialDataService from "../services/TutorialDataServiceRest";
 import { Link } from "react-router-dom";
-import TutorialDataService from "../services/TutorialDataService";
-import Pagination from "@material-ui/lab/Pagination";
-
 
 const TutorialsList = () => {
   
   const [searchTitle, setSearchTitle] = useState("");
-  const [tutorials, setTutorials] = useState(TutorialDataService.getAll());
-
+  const [tutorials, setTutorials] = useState();
 
   const onChangeSearchTitle = e => {
     const searchTitle = e.target.value;
     setSearchTitle(searchTitle);
   };
 
+    useEffect(() => {
+      retrieveTutorials();
+    }, []);
 
+    const retrieveTutorials = () => {
+      TutorialDataService.getAll()
+        .then(response => {
+          setTutorials(response.data);
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    };
 
   const deleteTutorial = (id) => {
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.remove(id);
+      TutorialDataService.remove(id)
+      .then(response => {
+        console.log(response.data);
+        retrieveTutorials();
+      })
+      .catch(e => {
+        console.log(e);
+      });
     }
   }
 
   const removeAllTutorials = () => {
     if (window.confirm('Deseja excluir?')){
-      TutorialDataService.removeAll();
-      setTutorials(TutorialDataService.getAll())
+    TutorialDataService.removeAll()
+      .then(response => {
+        console.log(response.data);
+        retrieveTutorials();
+      })
+      .catch(e => {
+        console.log(e);
+      });
     }
   };
 
-
   const findByTitle = () => {
-    setTutorials(TutorialDataService.getById(searchTitle))
+    TutorialDataService.findByTitle(searchTitle)
+      .then(response => {
+        setTutorials(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   return (
     <div className="list row">
       <div className="col-md-10">
-        
         <div className="input-group mb-3">
           <input
             type="text"
@@ -60,7 +88,6 @@ const TutorialsList = () => {
       </div>
       <div className="col-md-10">
         <h4>Tutorials List</h4>
-
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -79,17 +106,16 @@ const TutorialsList = () => {
                 <th scope="row">{tutorial.key}</th>
                 <td>{tutorial.title}</td>
                 <td>{tutorial.description}</td>
-                <td> <Link to={"/tutorials/" + tutorial.title}
+                <td> <Link to={"/tutorials/" + tutorial.id}
                   className="badge badge-warning">Edit</Link>
                 </td>
-                <td> <Link onClick={() => deleteTutorial(tutorial.title)}
+                <td> <Link onClick={() => deleteTutorial(tutorial.id)}
                   className="badge badge-danger">Remove</Link>
                 </td>
               </tr>
             ))}
             </tbody>
           </table>
-          
         <button
           className="m-3 btn btn-sm btn-danger"
           onClick={removeAllTutorials}>

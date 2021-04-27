@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TutorialDataService from "../services/TutorialDataService";
+import TutorialDataService from "../services/TutorialDataServiceRest";
 
 const AddTutorial = () => {
   const initialTutorialState = {
@@ -19,12 +19,23 @@ const AddTutorial = () => {
   const saveTutorial = () => {
     var data = {
       title: tutorial.title,
-      description: tutorial.description,
-      published: false
+      description: tutorial.description
     };
 
-    TutorialDataService.create(data);
-    setSubmitted(true);
+    TutorialDataService.create(data)
+      .then(response => {
+        setTutorial({
+          id: response.data.id,
+          title: response.data.title,
+          description: response.data.description,
+          published: response.data.published
+        });
+        setSubmitted(true);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const newTutorial = () => {
@@ -55,7 +66,6 @@ const AddTutorial = () => {
               name="title"
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <input
@@ -68,7 +78,6 @@ const AddTutorial = () => {
               name="description"
             />
           </div>
-
           <button onClick={saveTutorial} className="btn btn-success">
             Submit
           </button>
