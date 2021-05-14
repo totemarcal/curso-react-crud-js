@@ -119,12 +119,19 @@ Faça o dowload do [Postman](https://www.postman.com/downloads/) e teste as urls
 ![enter image description here](https://github.com/totemarcal/cursoHUB/blob/main/Screenshot_20210414_211253.png?raw=true)
 #### GET
 Exemplo 1: Buscar todos os produtos
+
 GET http://localhost:3000/produtos/
+
 Exemplo 2: Buscar todas as categorias
+
 GET http://localhost:3000/categorias/
+
 Exemplo 3: Buscar apenas um produtos
+
 GET http://localhost:3000/produtos/1
+
 Exemplo 4: Buscar apenas uma categoria
+
 GET http://localhost:3000/categorias/1
 
 #### POST
