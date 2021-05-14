@@ -1,6 +1,6 @@
 # CRUD React.js com API Rest
 
-Inicialmente vamos fazer um mock de uma API usando **json-server** e em seguida vamos fazer um mock **[mock.api](https://mockapi.io/) ** e consumindo em uma aplicação React.js crianda anteriormente.
+Inicialmente vamos fazer um mock de uma API usando **json-server** e em seguida vamos fazer um mock [mock.api](https://mockapi.io/)  e consumindo em uma aplicação React.js crianda anteriormente.
 
 ## Conceitos de uma API REST
 Tempo estimado: 30 min
