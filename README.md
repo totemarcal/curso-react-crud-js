@@ -66,7 +66,7 @@ import  "bootstrap/dist/css/bootstrap.min.css";
 ### Estruturando o projeto
 
 Navegue até a pasta **src** do projeto e crie outras duas pastas: **components** e **services**.
-Na pasta **components** crie os arquivos: **AddTutorial.js**, **Tutorial.js** e ** TutorialList.js**. Na pasta **services** crie o arquivo **TutorialDataService.js**. 
+Na pasta **components** crie os arquivos: **AddTutorial.js**, **Tutorial.js** e **TutorialList.js**. Na pasta **services** crie o arquivo **TutorialDataService.js**. 
 
 ![](https://github.com/totemarcal/cursoHUB/blob/main/Screenshot_20210410_165814.png?raw=true)
 
