@@ -30,6 +30,8 @@ Um repositório do Git é um armazenamento virtual para projetos. Ele permite qu
 
 ### Enviando o projeto ao repositório
 
+Primeiramente tem baixar e instalar o Git no seu computador https://git-scm.com/downloads.
+
 1. Dentro da pasta do projeto **react-hooks-crud-bootstrap** inicialize um projeto git.
 > git init
 2. O **git add** comando adiciona uma mudança no diretório de trabalho à área de preparação. Ele diz ao Git que você deseja incluir atualizações para um arquivo específico no próximo commit.
