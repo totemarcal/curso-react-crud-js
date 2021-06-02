@@ -240,6 +240,7 @@ Tempo Estimado: 40 min
 7. Cada membro deve criar três arquivos **AddEntidade1.js**, **Entidade1.js** e **Entidade1List.js**  e adicionar **Entidade1List.js** ao menu. Na pasta **services** crie o arquivo **Entidade1DataService.js**. 
 8. Cada membro deve fazer **git add*, *git commit** e **git push** na **feature** aberta.
 9. Cada membro deve fazer **git flow finish** na **feature** aberta.
+10. Cada membro deve fazer **git push -u origin develop**.
 
 ## Apresentação
 
