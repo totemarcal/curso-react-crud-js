@@ -236,7 +236,8 @@ Tempo Estimado: 40 min
 3. O líder deve criar o menu no projeto novo
 4. O líder deve criar um repositório no Github e adicionar os outros membros da equipe ao repositório
 5. Cada membro da equipe deve fazer o clone do projeto
-6. Cada membro da equipe deve criar uma **feature** e fazer o **push**. O líder deve verificar se todas as **features** foram criadas.7. Cada membro deve criar três arquivos **AddEntidade1.js**, **Entidade1.js** e **Entidade1List.js**  e adicionar ** Entidade1List.js** ao menu. Na pasta **services** crie o arquivo **Entidade1DataService.js**. 
+6. Cada membro da equipe deve criar uma **feature** e fazer o **push**. O líder deve verificar se todas as **features** foram criadas.
+7. Cada membro deve criar três arquivos **AddEntidade1.js**, **Entidade1.js** e **Entidade1List.js**  e adicionar **Entidade1List.js** ao menu. Na pasta **services** crie o arquivo **Entidade1DataService.js**. 
 8. Cada membro deve fazer **git add*, *git commit** e **git push** na **feature** aberta.
 9. Cada membro deve fazer **git flow finish** na **feature** aberta.
 
