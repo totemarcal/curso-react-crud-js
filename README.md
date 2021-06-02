@@ -215,13 +215,17 @@ Cada novo **feature** deve residir na própria ramificação, a qual pode ser en
 
 7. Enviando as alterações para a branch `feature_branch`:
 
-> git push -u origin develop
+> git push -u origin `feature/new_branch`
 
 8. O **git flow finish** mescla a `feature_branch` no `develop`, remove a `feature_branch` e volta para o branch `develop`. Finalização da ramificação de **feature**:
 
 > git flow feature finish feature_branch
 
-9. Verifique na branch `develop`  no Github se as alterações existem.
+9. Enviando as alterações para a branch `feature_branch`:
+
+> git push -u origin `develop`
+
+10. Verifique na branch `develop`  no Github se as alterações existem.
 
 ## Projeto Semanal
 
