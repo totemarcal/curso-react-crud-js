@@ -207,9 +207,9 @@ Cada novo **feature** deve residir na própria ramificação, a qual pode ser en
 
 > git push -u origin feature_branch
 
-4. Verifique no Github se a `feature_branch` foi criada
+4. Verifique no Github se a `feature/new_branch` foi criada
 
-5. Altere o arquivo ** TutorialList.js** 
+5. Altere o arquivo **TutorialList.js** 
 
 6. Faça o **git add** e depois **git commit**  
 
