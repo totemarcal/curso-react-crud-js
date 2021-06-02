@@ -201,11 +201,11 @@ Cada novo **feature** deve residir na própria ramificação, a qual pode ser en
 
 1. Criação da ramificação da **feature**:
 
-> git flow feature start feature_branch
+> git flow feature start new_branch
 
 2. Fazendo commit em uma feature:
 
-> git push -u origin feature_branch
+> git push -u origin feature/new_branch
 
 4. Verifique no Github se a `feature/new_branch` foi criada
 
