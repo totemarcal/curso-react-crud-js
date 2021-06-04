@@ -187,6 +187,7 @@ const AddTutorial = () => {
         </div>
       ) : (
         <div>
+          <form onSubmit={saveTutorial}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input
@@ -211,9 +212,9 @@ const AddTutorial = () => {
               name="description"
             />
           </div>
-          <button onClick={saveTutorial} className="btn btn-success">
-            Submit
-          </button>
+         <button type="submit" 
+                className="btn btn-success">Submit</button>  
+          </form>
         </div>
       )}
     </div>
