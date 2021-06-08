@@ -46,7 +46,10 @@ const Tutorial = props => {
   };
 
   const deleteTutorial = () => {
-    
+    console.log(currentTutorial)
+    if (window.confirm('Deseja excluir?')){
+      TutorialDataService.remove(currentTutorial.key);  
+    }
   };
 
   return (

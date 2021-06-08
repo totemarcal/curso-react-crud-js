@@ -1,9 +1,10 @@
-import React, {useState}from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TutorialDataService from "../services/TutorialDataService";
 
-const TutorialList = () => {
-  const [searchTitle, setSearchTitle] = useState("")
+const TutorialsList = () => {
+  
+  const [searchTitle, setSearchTitle] = useState("");
   const [tutorials, setTutorials] = useState(TutorialDataService.getAll());
 
   const onChangeSearchTitle = e => {
@@ -11,17 +12,20 @@ const TutorialList = () => {
     setSearchTitle(searchTitle);
   };
 
-  const findByTitle = () => {
-    setTutorials(TutorialDataService.getById(searchTitle))
-    // alert("Em Construção");
-  };
-
-  const deleteTutorial = (title) => {
-    alert("Title"+title)
-  };
+  const deleteTutorial = (id) => {
+    if (window.confirm('Deseja excluir?')){
+      TutorialDataService.remove(id);
+    }
+  }
 
   const removeAllTutorials = () => {
-
+    if (window.confirm('Deseja excluir?')){
+      TutorialDataService.removeAll();
+      setTutorials(TutorialDataService.getAll())
+    }
+  };
+  const findByTitle = () => {
+    setTutorials(TutorialDataService.getById(searchTitle))
   };
 
   return (
@@ -39,7 +43,8 @@ const TutorialList = () => {
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByTitle}>
+              onClick={findByTitle}
+            >
               Search
             </button>
           </div>
@@ -62,7 +67,7 @@ const TutorialList = () => {
             tutorials &&
             tutorials.map((tutorial, index) => (
               <tr>
-                <th scope="row">{tutorial.id}</th>
+                <th scope="row">{tutorial.key}</th>
                 <td>{tutorial.title}</td>
                 <td>{tutorial.description}</td>
                 <td> <Link to={"/tutorials/" + tutorial.title}
@@ -85,4 +90,4 @@ const TutorialList = () => {
   );
 };
 
-export default TutorialList;
+export default TutorialsList;

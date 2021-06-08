@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import TutorialDataService from "../services/TutorialDataService";
-import Tutorial from "./Tutorial";
 
 const AddTutorial = () => {
   const initialTutorialState = {
@@ -18,7 +17,13 @@ const AddTutorial = () => {
   };
 
   const saveTutorial = () => {
-    TutorialDataService.create(tutorial);
+    var data = {
+      title: tutorial.title,
+      description: tutorial.description,
+      published: false
+    };
+
+    TutorialDataService.create(data);
     setSubmitted(true);
   };
 
@@ -38,35 +43,33 @@ const AddTutorial = () => {
         </div>
       ) : (
         <div>
-          <form onSubmit={saveTutorial}>
-            <div className="form-group">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={tutorial.title}
-                onChange={handleInputChange}
-                name="title"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={tutorial.description}
-                onChange={handleInputChange}
-                name="description"
-              />
-            </div>
-            <button type="submit" className="btn btn-success">
-              Submit
-            </button>
-          </form>
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              required
+              value={tutorial.title}
+              onChange={handleInputChange}
+              name="title"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              className="form-control"
+              id="description"
+              required
+              value={tutorial.description}
+              onChange={handleInputChange}
+              name="description"
+            />
+          </div>
+          <button onClick={saveTutorial} className="btn btn-success">
+            Submit
+          </button>
         </div>
       )}
     </div>
