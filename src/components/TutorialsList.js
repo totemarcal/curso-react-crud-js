@@ -24,6 +24,7 @@ const TutorialsList = () => {
       setTutorials(TutorialDataService.getAll())
     }
   };
+  
   const findByTitle = () => {
     setTutorials(TutorialDataService.getById(searchTitle))
   };
